@@ -11,30 +11,34 @@ function ProductsCard({ data }) {
   // console.log(addCard.length);
 
   // useContex 
-  const { addCart, setAddCart } = useContext(cartContext)
+  const { addCart, setAddCart, setProfile, loginStatus  } = useContext(cartContext)
   console.log(addCart);
 
-  const { dispatch } = useContext(CartContext);
+  const navigate = useNavigate()
 
 
   const addItem = (idMeal, strMealThumb, strMeal, strArea, strInstructions, strCategory, strIngredient1) => {
-    const obj = {
-      idMeal, strMealThumb, strMeal, strArea, strInstructions, strCategory, strIngredient1
+    if (loginStatus === true) {
+      const obj = {
+        idMeal, strMealThumb, strMeal, strArea, strInstructions, strCategory, strIngredient1
+      }
+      setAddCart([...addCart, obj])
+      toast.success('Added to Cart', {
+        position: "bottom-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else {
+      navigate('/sign-in')
     }
-    setAddCart([...addCart, obj])
-    toast.success('Added to Cart', {
-      position: "bottom-right",
-      autoClose: 1500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
   }
-  console.log(addCart);
+  // console.log(addCart);
 
   return (
     <>
@@ -66,8 +70,12 @@ function ProductsCard({ data }) {
                       className={`bg-red-600 text-white
                     curser-pointer hover:scale-105 duration-300
                     py-2 px-8 rounded-full relative z-10 `}
-                      onClick={() => addItem(data.idMeal, data.strMealThumb, data.strMeal, data.strArea, data.strInstructions, data.strCategory , data.strIngredient1)}
-                      // onClick={() => dispatch({ type: "Add", product: data })}
+
+
+                      onClick={() => { addItem(data.idMeal, data.strMealThumb, data.strMeal, data.strArea, data.strInstructions, data.strCategory, data.strIngredient1) }
+
+                      }
+                    // onClick={() => dispatch({ type: "Add", product: data })}
                     >Order</button>
 
                   </div>

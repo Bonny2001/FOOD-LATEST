@@ -1,10 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { IoMdSearch } from "react-icons/io"
 import { FaShoppingCart } from "react-icons/fa"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate, useParams } from 'react-router-dom'
 import { cartContext } from './cartContext'
 import Button from './Button'
 import { CartContext } from './Features/ContexProvider.jsx'
+import { useEffect } from 'react'
+
+
 
 const MenuLink = [
     {
@@ -15,12 +18,12 @@ const MenuLink = [
     {
         id: 2,
         name: "Shop",
-        link: "/#shop"
+        link: "/shop"
     },
     {
         id: 3,
         name: "About",
-        link: "/#about"
+        link: "/about"
     },
     // {
     //     id: 4,
@@ -28,15 +31,34 @@ const MenuLink = [
     //     link: "/card"
     // },
 ]
-function Navbar() {
+function Navbar({ profile, setSearchTerm, myname , updateName}) {
+
 
     //   const {addCart , setAddCart} = useContext(cartContext)
 
-    const { cart, dispatch } = useContext(CartContext);
-    const { addCart, setAddCart } = useContext(cartContext)
+    const [showContent, setShowContent] = useState(false);
+    // const { cart, dispatch } = useContext(CartContext);
+    // useContex 
+    const { addCart, myMongoId, userName, setUserName } = useContext(cartContext)
+    // const { id } = useParams()
     const navigate = useNavigate()
+    // console.log(searchTerm);
+    // console.log("myname:", myname);
+   
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            // Prevent default form submission if the input is inside a form
+            event.preventDefault();
+            setShowContent(true); // Set state to show the new content
+            if (showContent) {
+                navigate("/shop")
+            }
+        }
+    };
+
 
     return (
+
         <div className="
         bg-white  
         dark:bg-gray-900
@@ -44,9 +66,18 @@ function Navbar() {
         shadow-md fixed top-0 left-0 right-0 z-50
         fixed w-full z-50
         ">
-            <div className='py-4 '>
+            <div className='pb-4 '>
 
-                <div className="container flex justify-between">
+                {
+                    profile ? (
+                        <div className='p-[2px] text-sm bg-orange-600 font-bold text-gray-100 text-center mb-1'> 50% ON YOUR FIRST ORDER {updateName}</div>
+
+                    ) : null
+
+                }
+
+
+                <div className="container flex justify-between pt-1">
                     {/* {Logo and Link Section} */}
                     <div className='flex gap-4 items-center'>
                         <a href="/"
@@ -74,8 +105,6 @@ function Navbar() {
                                                 dark:hover:text-white duration-200'>{data.name}
                                             </button>
                                         </li>
-
-
                                     ))
                                     }
                                 </ul>
@@ -87,20 +116,40 @@ function Navbar() {
                     <div className='flex justify-between items-center gap-4'>
                         {/* Search Bar Section */}
                         <div className=' relative group hidden sm:block'>
-                            <input type="text" placeholder='Search'
-                                className='search-bar' />
+                            <input
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                onKeyDown={handleKeyDown}
+                                type="text" placeholder='Search'
+                                className='search-bar  rounded-full pl-4' />
                             <IoMdSearch
                                 className='text-xl text-gray-600 dark:text-gray-400
                                  group-hover:text-primary duration-200 
                                  absolute top-1/2 -translate-y-1/2 right-3'/>
                         </div>
+
                         {/* Dark Mode Section */}
-                        <button
-                            onClick={() => navigate("/sign-in")}
-                            className={` bg-primary text-gray-100
-                             curser-pointer hover:scale-105 duration-300
-                             py-1 px-6 rounded-full relative z-10 `}
-                        >Join Now</button>
+                        {
+                            profile ? (
+                                <div className='flex flex-row items-center gap-1'>
+                                    <button className=' flex justify-center items-center gap-1' onClick={() => navigate("/update_profile/" + myMongoId)}>
+                                        <img className='h-6 rounded-sm' src="avatar.png" alt="Avatar" />
+                                        <p className='   text-[10px] font-bold antialiased italic text-gray-600 '>{updateName}</p>
+                                    </button>
+                                    {/* border-black border-2 border-dotted p-1 rounded-sm  */}
+
+                                </div>) :
+                                (<div>
+                                    <button
+                                        onClick={() => navigate("/sign-in")}
+                                        className={` bg-primary text-gray-100
+                                     curser-pointer hover:scale-105 duration-300
+                                     py-1 px-6 rounded-full relative z-10 `}
+                                    >Join Now</button>
+
+                                </div>)
+                        }
+
+
                         {/* <Link to={'/card'}> */}
                         <button
                             onClick={() => navigate("/card")}
@@ -108,7 +157,7 @@ function Navbar() {
                         // href="/card"
                         >
                             <FaShoppingCart
-                                className='text-xl text-gray-600 dark:text-gray-400' />
+                                className='text-md text-gray-600 dark:text-gray-400' />
                             <div className='w-4 h-4 bg-red-500 text-white
                                 rounded-full absolute top-0 right-0 flex items-center
                                 justify-center text-xs'>

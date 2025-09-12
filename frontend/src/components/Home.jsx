@@ -69,7 +69,7 @@ const HeroSlide = [
 
 
 ]
-function Home({ showData, setShowData }) {
+function Home({ showData, setShowData , searchTerm ,setShowContent}) {
 
 
   // const addCart = (idMeal, strMealThumb, strMeal, strArea, strInstructions , strCategory) => {
@@ -116,8 +116,12 @@ function Home({ showData, setShowData }) {
 
         <Services />
 
-        <Products showData={showData} setShowData={setShowData}  />
+        <Products showData={showData} 
+        setShowData={setShowData} 
+        searchTerm={searchTerm} 
+        setShowContent={setShowContent} />
         <Footer />
+
 
       </div>
     </>

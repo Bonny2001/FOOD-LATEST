@@ -1,32 +1,49 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-function Login() {
+import { cartContext } from './cartContext';
+
+function Login({ setProfile, setLoginStatus ,setName , setUpdateName }) {
     const [email, setEmail] = useState("");
     const [password, setmypassword] = useState("");
     const navigate = useNavigate();
+ 
+   
+    
+
+     const { setMyId ,setUserName } = useContext(cartContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-     try {
-             const response = await  axios.post("http://localhost:3000/loginUser", {
-            email, password,
-        })
-        console.log("response:", response); // Debug
-        {
-             if (response.data === "Success") {
-                alert("Login Successful");
-                // setActive(true)
+        try {
+            const response = await axios.post("http://localhost:3000/loginUser", {
+                email, password,
+            })
+            // console.log("response:", response.data._id); // Debug
+            // console.log("response:", response.data.userId); // Debug
+            console.log("User ObjectId:", response.data.userId); // <-- special MongoDB _id
+            setMyId(response.data.userId);
+            setName(response.data.userName)
+            setUpdateName(response.data.userName)
+            // console.log("User-ID",response.data.userName);
+            
 
-                navigate("/");
-            } else {
-                alert("Wrong password");
+            {
+                if (response.data.message === "Success") {
+                    alert("Login Successful");
+                    // setActive(true)
+                    setProfile(true);
+                    navigate("/");
+                    setLoginStatus(true);
+
+                } else {
+                    alert("Wrong password");
+                }
             }
-        }
-     } catch (error) {
-          console.error("Login failed:", error);
+        } catch (error) {
+            console.error("Login failed:", error);
             alert("Login Failed: Something went wrong");
-     }
+        }
     }
     return (
         <div className='container max-w-150  pt-25'>
@@ -36,13 +53,13 @@ function Login() {
                         <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h1>
                         <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400">
                             Don't have an account yet?
-                          <>
-                            <Link to="/sign-up" className="text-blue-600 decoration-2 hover:underline
+                            <>
+                                <Link to="/sign-up" className="text-blue-600 decoration-2 hover:underline
                              focus:outline-hidden focus:underline font-medium 
                              dark:text-blue-500" >
-                                &nbsp;  Sign up here
-                            </Link>
-                          </>
+                                    &nbsp;  Sign up here
+                                </Link>
+                            </>
                         </p>
                     </div>
 

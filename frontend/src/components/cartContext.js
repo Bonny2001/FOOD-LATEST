@@ -2,6 +2,12 @@ import React, { createContext , useReducer } from 'react'
 
 export const cartContext = createContext()
 
+
+
+
+
+
+
 // const ContextProvider = ({children}) => {
 //     const [cart, dispatch] = useReducer(CartReducer, [])
 //   return (
