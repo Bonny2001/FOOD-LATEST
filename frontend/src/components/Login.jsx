@@ -29,7 +29,7 @@ function Login({ setProfile, setLoginStatus ,setName , setUpdateName }) {
             
 
             {
-                if (response.data.message === "Login successful") {
+                if (response.data.message === "Success") {
                     alert("Login Successful");
                     // setActive(true)
                     setProfile(true);
