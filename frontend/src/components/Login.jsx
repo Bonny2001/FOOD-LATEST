@@ -7,7 +7,7 @@ function Login({ setProfile, setLoginStatus ,setName , setUpdateName }) {
     const [email, setEmail] = useState("");
     const [password, setmypassword] = useState("");
     const navigate = useNavigate();
- 
+         const url = "https://food-latest-cfx7.onrender.com"
    
     
 
@@ -16,7 +16,7 @@ function Login({ setProfile, setLoginStatus ,setName , setUpdateName }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/loginUser", {
+            const response = await axios.post(url + "/loginUser", {
                 email, password,
             })
             // console.log("response:", response.data._id); // Debug
