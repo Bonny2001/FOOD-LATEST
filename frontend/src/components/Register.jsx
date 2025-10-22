@@ -5,12 +5,14 @@ function Register() {
     const [name , setName] = useState("")
     const [email , setEmail ] = useState("")
     const [mypassword , setmypassword ] = useState("")
+        const url = "https://food-latest-cfx7.onrender.com"
+    
     console.log("Name: "+name);
     console.log("Email: "+email);
     console.log("Password"+ mypassword);
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/createUser", {
+        axios.post(url + "/createUser", {
             name: name,
             email: email,
             password: mypassword
