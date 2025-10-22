@@ -16,7 +16,7 @@ function ProductsCard({ data }) {
 
   const navigate = useNavigate()
 
-
+  
   const addItem = (idMeal, strMealThumb, strMeal, strArea, strInstructions, strCategory, strIngredient1) => {
     if (loginStatus === true) {
       const obj = {
@@ -60,6 +60,7 @@ function ProductsCard({ data }) {
           {/* Card Section */}
           {
             data.map((data) => (
+              
               <div className='group' key={data.idMeal}>
                 <div className='relative space-y-3'>
                   <img src={data.strMealThumb} alt="" className='h-[150px] w-[160px] object-cover rounded-md' />

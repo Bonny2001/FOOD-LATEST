@@ -14,10 +14,10 @@ function Category() {
                                 <p className='mb-[2px] text-gray-400'>Enjoy</p>
                                 <p className='text-2xl font-semibold mb-[2px]'>Tasty</p>
                                 <p className='text-4xl xl:text-5xl font-bold opacity-20 mb-2'>Salmon Fish</p>
-                                <Button
+                                {/* <Button
                                 text="Browser"
                                 bgColor={"bg-primary"}
-                                textColor={"text-white"}/>
+                                textColor={"text-white"}/> */}
                             </div>
                         </div>
                         <img src="fish.png" alt=""  className='w-[220px]  absolute bottom-0 -right-0 ' />
@@ -25,11 +25,11 @@ function Category() {
 
 
                     {/* Second Col */}
-                    <div className='py-10 pl-5 bg-gradient-to-br from-yellow-300/90
+                    {/* <div className='py-10 pl-5 bg-gradient-to-br from-yellow-300/90
                         to-yellow-300/70 text-white rounded-3xl relative h-[320px] flex items-end'>
                         <div>
                             <div className='mb-4'>
-                                {/* <p className='mb-[2px] text-gray-400 text-gray-900'>Butter</p> */}
+                                <p className='mb-[2px] text-gray-400 text-gray-900'>Butter</p>
                                 <p className='text-2xl font-semibold mb-[2px] text-gray-900'>Butter</p>
                                 <p className='text-4xl xl:text-5xl font-bold opacity-60 mb-2 text-gray-900'>Paneer</p>
                                 <Button
@@ -40,6 +40,21 @@ function Category() {
                         </div>
                         <img src="curry.png" alt="" 
                          className='w-[180px]  absolute -right-0 lg:top-0 top-1' />
+                    </div> */}
+                         <div className='py-10 pl-5 bg-gradient-to-br from-yellow-300/90
+                    to-yellow-300/70 text-white rounded-3xl relative h-[320px] flex items-start'>
+                        <div>
+                            <div className='mb-4 '>
+                                <p className='mb-[2px] text-gray-800'>Enjoy</p>
+                                <p className='text-2xl text-black  font-semibold mb-[2px]'>Butter</p>
+                                <p className='text-4xl xl:text-5xl text-black  font-bold opacity-50 mb-2'>Paneer</p>
+                                {/* <Button
+                                 text="Browser"
+                                bgColor={"bg-white"}
+                                textColor={"text-yellow-600"}/> */}
+                            </div>
+                        </div>
+                        <img src="curry.png" alt=""  className='w-[220px]  absolute bottom-0 -right-0 ' />
                     </div>
 
 
@@ -51,10 +66,10 @@ function Category() {
                                 <p className='mb-[2px] text-gray-400'>Double</p>
                                 <p className='text-2xl font-semibold mb-[2px]'>Fried Egg</p>
                                 <p className='text-4xl xl:text-5xl font-bold opacity-20 mb-2'>Chicken Roll</p>
-                                <Button
+                                {/* <Button
                                 text="Browser"
                                 bgColor={"bg-white"}
-                                textColor={"text-red-600"}/>
+                                textColor={"text-red-600"}/> */}
                             </div>
                         </div>
                         <img src="roll.png" alt="" 
