@@ -127,7 +127,29 @@ app.put("/updateDATA/:id", async (req, res) => {
         .catch((err) => res.json(err))
 })
 
+app.post("/token", async (req, res) => {
+    try {
+        const { token } = req.body
 
+        const decode = jwt.verify(token, secretKey)
+        const userVerify = decode.email
+
+        const user = await User.findOne({ email: userVerify })
+        if (user && decode) {
+            res.status(200).json({
+                message: "token verified",
+                email: user.email,
+                name: user.name
+            })
+        } else {
+            res.status(400).json({ message: "token verification failed" })
+        }
+
+    } catch (error) {
+        console.error("Error:" + error);
+
+    }
+})
 // app.get("/",(req, res) => {
 //     let data = jwt.verify(req.cookies.token, 'secretKey');
 // });  
