@@ -1,5 +1,7 @@
 import React, { createContext, useState } from 'react'
 import Navbar from './components/Navbar'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Card from './components/Card'
@@ -37,6 +39,29 @@ function App() {
    const [myname, setName] = useState("")
       const [updateName, setUpdateName] = useState("")
 
+    useEffect(() => {
+    const tokenVerify = async () => {
+      try {
+        const res = await axios.post("http://localhost:3000/token", {
+          token: window.localStorage.getItem("token")
+        })
+        console.log(res.data);
+        setProfile(true)
+        setLoginStatus(true)
+        setUpdateName(res.data.name)
+        setName(res.data.name)
+        setMyId(res.data.id)
+
+
+
+      } catch (error) {
+        console.error("Error:" + error);
+
+      }
+    }
+    tokenVerify()
+  }, [])
+  
   return (
     <div>
 
