@@ -42,7 +42,7 @@ const url = "https://food-latest-cfx7.onrender.com"
     useEffect(() => {
     const tokenVerify = async () => {
       try {
-        const res = await axios.post(url +"/token", {
+        const res = await axios.post("https://food-latest-cfx7.onrender.com/token", {
           token: window.localStorage.getItem("token")
         })
         console.log(res.data);
