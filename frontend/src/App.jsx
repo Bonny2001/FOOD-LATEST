@@ -38,11 +38,11 @@ function App() {
   
    const [myname, setName] = useState("")
       const [updateName, setUpdateName] = useState("")
-
+const url = "https://food-latest-cfx7.onrender.com"
     useEffect(() => {
     const tokenVerify = async () => {
       try {
-        const res = await axios.post("http://localhost:3000/token", {
+        const res = await axios.post(url +"/token", {
           token: window.localStorage.getItem("token")
         })
         console.log(res.data);
