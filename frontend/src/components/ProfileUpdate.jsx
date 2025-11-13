@@ -17,10 +17,10 @@ const ProfileUpdate = ({ myname, setName , updateName, setUpdateName }) => {
     // useCOntext 
     // const { myname, setName} = useContext(cartContext)
 
-
+const url = "https://food-latest-cfx7.onrender.com"
     const HandleSubmit = (e) => {
         e.preventDefault()
-        axios.put("http://localhost:3000/updateDATA/" + id, {
+        axios.put(url+"updateDATA/" + id, {
             id: myid,
             name: myname,
             email: myemail,
